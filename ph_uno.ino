@@ -1,6 +1,6 @@
-#define SensorPin A0 //pH meter Analog output to Arduino Analog Input 0
+#define SensorPin 26 //pH meter Analog output to Arduino Analog Input 0
 
-#define Offset 0.00 //deviation compensate
+#define Offset 1.8 //deviation compensate
 
 #define LED 13
 
@@ -20,7 +20,7 @@ void setup(void) {
 
 pinMode(LED,OUTPUT);
 
-Serial.begin(9600);
+Serial.begin(115200);
 
 Serial.println("pH meter experiment!"); //Test the serial monitor
 
@@ -42,7 +42,7 @@ pHArray[pHArrayIndex++]=analogRead(SensorPin);
 
 if(pHArrayIndex==ArrayLenth)pHArrayIndex=0;
 
-voltage = avergearray(pHArray, ArrayLenth)*5.0/1024;
+voltage = avergearray(pHArray, ArrayLenth)*3.3/4096;
 
 pHValue = 3.5*voltage+Offset;
 
